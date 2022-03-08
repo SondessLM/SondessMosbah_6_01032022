@@ -12,11 +12,11 @@ const sauce = require('./models/sauce');
 const path = require('path');
 
 //importer les routes sauce et utilisateur
-const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
+// const sauceRoutes = require('./routes/sauce');
 
 // conneter à la base de données (BDD)
-mongoose.connect('mongodb+srv://Sondess:<>@cluster0.7ocvn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://Sondess:Cluster2022@cluster0.7ocvn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   { useNewUrlParser:true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -46,8 +46,9 @@ app.use(express.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Configurer le routes API
-app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
+// app.use('/api/sauces', sauceRoutes);
+
 
 // exporter le module
 module.exports = app;
