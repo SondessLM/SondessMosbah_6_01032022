@@ -1,7 +1,8 @@
+// proteger les informations de connexion vers la base de données mongoDB
 const http = require('http');
-
 const app = require('./app');
 
+// optimiser server.js
 const normalizePort = val => {
   const port = parseInt(val, 10);
 
@@ -16,6 +17,7 @@ const normalizePort = val => {
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+// gerer les erreurs
 const errorHandler = error => {
   if (error.syscall !== 'listen') {
     throw error;
