@@ -1,3 +1,5 @@
+// require('dotenv').config()          // load environment variables from the .env file into process.env
+
 //importer le framework express de node.js (creer des appli web avec node)
 const express = require('express');
 
@@ -8,12 +10,28 @@ const bodyParser =  require('body-parser');
 const mongoose = require('mongoose');
 
 const sauce = require('./models/sauce');
+
 //donner un moyen d’utiliser des répertoires et des chemins d’accès aux fichiers
 const path = require('path');
 
+//limiter les demandes répétées aux API par le package express rate limit 
+const rateLimit = require('express-rate-limit');
+
+// configurer de manière appropriée des en-têtes HTTP 
+const helmet = require('helmet');
+
+
 //importer les routes sauce et utilisateur
 const userRoutes = require('./routes/user');
-// const sauceRoutes = require('./routes/sauce');
+const sauceRoutes = require('./routes/sauce');
+
+//configurer express rate limit
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limite a 100 les requetes de chaque IP pendant 15 minutes
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
 
 // conneter à la base de données (BDD)
 mongoose.connect('mongodb+srv://Sondess:Cluster2022@cluster0.7ocvn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
@@ -36,18 +54,24 @@ app.use((req, res, next) => {
   next();
 });
 
+// protéger l'application contre certaines vulnérabilités
+app.use((req, res, next) => {
+  res.setHeader("X-XSS-Protection", "1; mode=block");
+  next();
+});
+
 // Envoyer toutes les demandes entrantes sous forme de Json
 app.use(bodyParser.json());
 
 //renvoyer le corps de la requette sous forme de Json
-app.use(express.json());
+// app.use(express.json());
 
 //Gerer les images 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Configurer le routes API
 app.use('/api/auth', userRoutes);
-// app.use('/api/sauces', sauceRoutes);
+app.use('/api/sauces', sauceRoutes);
 
 
 // exporter le module

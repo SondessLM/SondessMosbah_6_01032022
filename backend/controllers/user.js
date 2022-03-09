@@ -7,6 +7,34 @@ const User = require ('../models/User');
 // securiser la connexion au compte: token user 
 const jwt = require('jsonwebtoken');
 
+//importer variable d'environnement
+require('dotenv').config();
+
+// fonction d'encodage qui servira à l'email
+
+function masked(sentence) {
+  if (typeof sentence === "string") {
+    let headMail = sentence.slice(0,1);
+    let bodyMail = sentence.slice(1, sentence.length-4);
+    let bottomMail = sentence.slice(sentence.length-4, sentence.length);
+    let final = [];
+    var masked = bodyMail.split('');
+    var maskedMail = [];
+    for(let i in masked) {
+      masked[i] = '*';
+      maskedMail += masked[i];  
+    }
+    final += headMail + maskedMail + bottomMail
+    return final;
+  }
+  console.log(sentence + " is not a mail");
+  return false
+}
+
+
+
+// inscription d'un utilisateur
+
 // inscription nouvel utilisateur
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
@@ -27,7 +55,7 @@ exports.signup = (req, res, next) => {
         //ceer un nouvel utilisateur
         const user = new User({
           // recuperer le corp de la requete 
-          email: req.body.email,
+          email: masked(req.body.email),
           // hasher le mot de passe lors de sacréation
           password: hash
         });
@@ -42,7 +70,7 @@ exports.signup = (req, res, next) => {
 // login pour utilisateur déja enregistré
   exports.login = (req, res, next) => {
     // verifier si l'email existe dans la BDD
-    User.findOne({ email: req.body.email })
+    User.findOne({ email: masked(req.body.email) })
       .then(user => {
         if (!user) {
           return res.status(401).json({ error: 'Utilisateur non trouvé !' });
