@@ -1,4 +1,4 @@
-// require('dotenv').config()          // load environment variables from the .env file into process.env
+ require('dotenv').config()          // load environment variables from the .env file into process.env
 
 //importer le framework express de node.js (creer des appli web avec node)
 const express = require('express');
@@ -24,6 +24,8 @@ const helmet = require('helmet');
 //importer les routes sauce et utilisateur
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
+
+const cors = require('cors');                    // import cors: manage cross-origin resource sharing
 
 //configurer express rate limit
 const limiter = rateLimit({
@@ -60,11 +62,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// application du package
+app.use(limiter);
+
+// secure HTTP headers
+app.use(helmet());
+
 // Envoyer toutes les demandes entrantes sous forme de Json
 app.use(bodyParser.json());
 
 //renvoyer le corps de la requette sous forme de Json
-// app.use(express.json());
+ app.use(express.json());
 
 //Gerer les images 
 app.use('/images', express.static(path.join(__dirname, 'images')));

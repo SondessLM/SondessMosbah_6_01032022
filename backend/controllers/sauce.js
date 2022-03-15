@@ -79,4 +79,3 @@ exports.getAllSauces = (req, res, next) => {
   );
 };
 
-// Like and dislike sauce
