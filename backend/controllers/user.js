@@ -10,8 +10,6 @@ const jwt = require('jsonwebtoken');
 //importer variable d'environnement
 require('dotenv').config();
 
-// fonction d'encodage qui servira à l'email
-
 
 // inscription nouvel utilisateur
 exports.signup = (req, res, next) => {
