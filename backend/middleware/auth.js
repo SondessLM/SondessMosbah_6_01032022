@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
   } catch {
     //envoyer erreur d'authentification
     res.status(401).json({
-      error: new Error('Invalid request!')
+      error: new Error('mot de passe incorrect')
     });
   }
 };

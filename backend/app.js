@@ -20,6 +20,8 @@ const rateLimit = require('express-rate-limit');
 // configurer de manière appropriée des en-têtes HTTP 
 const helmet = require('helmet');
 
+const  mongoSanitize  =  require ( 'express-mongo-sanitize' ) ;
+
 
 //importer les routes sauce et utilisateur
 const userRoutes = require('./routes/user');
@@ -66,13 +68,12 @@ app.use((req, res, next) => {
 app.use(limiter);
 
 // secure HTTP headers
-app.use(helmet());
-
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 // Envoyer toutes les demandes entrantes sous forme de Json
 app.use(bodyParser.json());
 
 //renvoyer le corps de la requette sous forme de Json
- app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 //Gerer les images 
 app.use('/images', express.static(path.join(__dirname, 'images')));
