@@ -1,44 +1,26 @@
-// const mongoose = require('mongoose');
 
-// // Afficher MOdèle de la sauce
-// const sauceSchema = mongoose.Schema({
-//   userId: { type: String, required: true },
-//   name: { type: String, required: true },
-//   manufacturer: { type: String, required: true },
-//   description: { type: String, required: true },
-//   mainPepper: { type: String, required: true },
-//   imageUrl: { type: String, required: true },
-//   heat: { type: Number, required: true },
-
-//   //Model du système de likes dislikes
-//   likes: { type: Number, required: false, default: 0 },
-//   dislikes: { type: Number, required: false,default: 0 },
-//   usersLiked: { type: Array, required: true },
-//   usersDisliked: { type: Array, required: true },
-// });
-
-//importation de mongo
+//importer mongo
 const mongoose = require('mongoose');
 
-//création du schema de donnée liée à la sauce
+//créer un  schema de donnée liée à la sauce
 const sauceSchema = mongoose.Schema({
-//identifiant MongoDB de l'utilisateur qui a crée la sauce
+//identifier MongoDB de l'utilisateur qui a crée la sauce
   userId: { type: String, required: true },
-  //nom de la sauce
+  //donner le nom de la sauce
   name: { type: String, required: true },
-  //fabriquant de la sauce
+  //donner le fabriquant de la sauce
   manufacturer: { type: String, required: true },
-  //description de la sauce
+  //faie une description à la sauce
   description: { type: String, required: true },
-  //principal ingrédient épicé de la sauce
+  //pesenter le principal ingrédient de la sauce
   mainPepper: { type: String, required: true },
-  //URL del'image de la sauce téléchargée
+  //presnter l'URL del'image téléchargée
   imageUrl: { type: String, required: true },
-  //nombre entre 1 et 10 décrivant la sauce
+  //mettre un nombre entre 1 et 10 
   heat: { type: Number, required: true },
-  // nombre d'utilisateurs qui aiment (= likent) la sauce
+  // nombre d'utilisateurs qui like la sauce
   likes: { type: Number, required: true },
-  // nombre d'utilisateurs qui n'aiment pas (= dislike) la
+  // nombre d'utilisateurs qui dislike la
 // sauce
   dislikes: { type: Number, required: true },
   // tableau des identifiants des utilisateurs qui ont aimé la sauce
@@ -50,4 +32,3 @@ const sauceSchema = mongoose.Schema({
 //Exportation du schema sous forme de modèle
 module.exports = mongoose.model('Sauce', sauceSchema); 
 
-//module.exports = mongoose.model('Sauce', sauceSchema);

@@ -1,6 +1,8 @@
 //
 const jwt = require('jsonwebtoken');
 
+require("dotenv").config();
+
 //exporter le lodule token
 module.exports = (req, res, next) => {
   try {
@@ -12,7 +14,7 @@ module.exports = (req, res, next) => {
     const userId = decodedToken.userId;
     req.auth = { userId };  
     if (req.body.userId && req.body.userId !== userId) {
-      throw 'Invalid user ID';
+      throw 'utilisateur non valide ';
     } else {
       next();
     }

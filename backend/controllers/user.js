@@ -48,30 +48,30 @@ exports.signup = (req, res, next) => {
  * @param {*} next 
  */
 exports.login = (req, res, next) => {
-  //on trouve l'utilisateur de la base de donnée
+  //chercher l'utilisateur dans BDD
   User.findOne({ email: req.body.email })
     .then(user => {
-      //si on ne trouve pas l'utilisateur
+      //Utilisateur non trouvé
       if (!user) {
         return res.status(401).json({ message: 'Utilisateur non trouvé !' });
       }
-      //si l'utilisateur a été trouvé on compare les mot de passes
+      //Comparer les mot de passes
       bcrypt.compare(req.body.password, user.password)
         .then(valid => {
-          //si elle n'est pas valable 
+          //mot de passe non valable 
           if (!valid) {
             return res.status(401).json({ message: 'Mot de passe incorrect !' });
           }
-          //si elle est valable on envoie un objet json avec le userId et token
+          //Envoie un objet json avec le userId et token
           res.status(200).json({
               userId: user._id,
-              //on appel la fonction sign de jwt pour encoder un nouveau token
+              // encoder un nouveau token la fonction sign de jwt 
               token: jwt.sign(
-                //on y ajoute l'id de l'utilisateur
+                //ajoute user id 
                 { userId: user._id },
-                //on ajoute une chaine secrète de développement temporaire
+                //Ajouter une chaine secrète de développement temporaire
                 'RANDOM_TOKEN_SECRET',
-                //nous définissons ensuite la fin de validité du token à 24H
+                //Fin de validité du token à 24H
                 { expiresIn: '24h' }
               )
             });
@@ -81,34 +81,3 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
 };
 
-// // login pour utilisateur déja enregistré
-// exports.login = (req, res, next) => {
-//   // verifier si l'email existe dans la BDD
-//   User.findOne({ email: masked(req.body.email) })
-//     .then(user => {
-//       if (!user) {
-//         return res.status(401).json({ message: 'Utilisateur non trouvé !' });
-//       }
-//       // comparer les entrées et les données
-//       bcrypt.compare(req.body.password, user.password)
-//         .then(valid => {
-//           //entrée non valable
-//           if (!valid) {
-//             return res.status(401).json({ message: 'Mot de passe incorrect !' });
-//           }
-//           // Envoyr un objet Json avec le userId et token si elle est valable
-//           res.status(200).json({          
-//             userId: user._id,
-//             token: jwt.sign(
-//               // donneés encodées danc le token
-//               { userId: user._id },
-//               // clé secrète valise 24h
-//               'RANDOM_TOKEN_SECRET',
-//               { expiresIn: '24h' }
-//             )
-//           });
-//         })
-//         .catch(error => res.status(500).json({ error }));
-//     })
-//     .catch(error => res.status(500).json({ error }));
-// };
