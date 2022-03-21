@@ -38,7 +38,7 @@ const limiter = rateLimit({
 });
 
 // conneter à la base de données (BDD)
-mongoose.connect('mongodb+srv://Sondess:Cluster2022@cluster0.lcmev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(process.env.MONGO_URI,
   { useNewUrlParser:true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))

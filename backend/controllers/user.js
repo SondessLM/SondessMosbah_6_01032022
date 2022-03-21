@@ -33,7 +33,7 @@ exports.signup = (req, res, next) => {
       //Enregistrement du nouvel utilisateur dans la BDD.
       user.save()
         .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-        .catch(error => res.status(400).json({ message : error.errors.email.message }));
+        .catch(error => res.status(400).json({ error }));
     })
     .catch(error => res.status(500).json({ error }));
 };
@@ -44,7 +44,7 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
   //chercher l'utilisateur dans BDD
-  user.findOne({ email: req.body.email })
+  User.findOne({ email: req.body.email })
     .then((user) => {
       console.log("user", user);
       //Utilisateur non trouvé
