@@ -38,7 +38,7 @@ const limiter = rateLimit({
 });
 
 // conneter à la base de données (BDD)
-mongoose.connect('mongodb+srv://Sondess:Cluster2022@cluster0.7ocvn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://Sondess:Cluster2022@cluster0.lcmev.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   { useNewUrlParser:true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -90,34 +90,3 @@ module.exports = app;
 
 
 
-// exports = function(changeEvent) {
- 
-
-//    // Access the _id of the changed document:
-//     const docId = changeEvent.documentKey._id;
-
-//    // Access the latest version of the changed document
-//    // (with Full Document enabled for Insert, Update, and Replace operations):
-//     const fullDocument = changeEvent.fullDocument;
-
-//     const updateDescription = changeEvent.updateDescription;
-
-//     //See which fields were changed (if any):
-//     if (updateDescription) {
-//       const updatedFields = updateDescription.updatedFields; // A document containing updated fields
-//     }
-
-//    // See which fields were removed (if any):
-//     if (updateDescription) {
-//       const removedFields = updateDescription.removedFields; // An array of removed fields
-//     }
-
-//     //Functions run by Triggers are run as System users and have full access to Services, Functions, and MongoDB Data.
-
-//     //Access a mongodb service:
-//     const collection = context.services.get(<SERVICE_NAME>).db("db_name").collection("coll_name");
-   
-//     //SERVICE_NAMEAccess the default http client and execute a GET request:
-//     const response = context.http.get({ url: <URL> })
-
-//     }

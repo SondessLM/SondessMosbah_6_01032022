@@ -7,7 +7,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 // creer un model user 
 const userSchema = mongoose.Schema({
   email: { type: String, required: true, unique: "L'adresse email existe déja." },
-  password: { type: String, required: true, unique: "Le mot de passe est incorrect." }
+  password: { type: String, required: true}
 });
 
 //Interdir la creation d'un deuxième user par la meme adresse mail

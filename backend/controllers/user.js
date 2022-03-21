@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt');
 
 //Importer shema model user.
-const User = require('../models/User');
+const User = require('../models/user');
 
 //Sécuriser la connexion au compte: token user.
 const jwt = require('jsonwebtoken');
@@ -40,27 +40,24 @@ exports.signup = (req, res, next) => {
 
 
 
-/**
- *  login pour utilisateur déja enregistré.
- * 
- * @param {*} req
- * @param {*} res 
- * @param {*} next 
- */
+// login pour utilisateur déja enregistré.
+
 exports.login = (req, res, next) => {
   //chercher l'utilisateur dans BDD
-  User.findOne({ email: req.body.email })
-    .then(user => {
+  user.findOne({ email: req.body.email })
+    .then((user) => {
+      console.log("user", user);
       //Utilisateur non trouvé
       if (!user) {
-        return res.status(401).json({ message: 'Utilisateur non trouvé !' });
+        return res.status(401).json({ error: 'Utilisateur non trouvé !' });
       }
       //Comparer les mot de passes
       bcrypt.compare(req.body.password, user.password)
         .then(valid => {
+          console.log("validation", valid);
           //mot de passe non valable 
           if (!valid) {
-            return res.status(401).json({ message: 'Mot de passe incorrect !' });
+            return res.status(401).json({ error: "Mot de passe incorrect !" });
           }
           //Envoie un objet json avec le userId et token
           res.status(200).json({
@@ -76,7 +73,7 @@ exports.login = (req, res, next) => {
               )
             });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({error }));
     })
     .catch(error => res.status(500).json({ error }));
 };

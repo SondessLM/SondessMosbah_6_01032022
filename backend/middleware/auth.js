@@ -14,14 +14,14 @@ module.exports = (req, res, next) => {
     const userId = decodedToken.userId;
     req.auth = { userId };  
     if (req.body.userId && req.body.userId !== userId) {
-      throw 'utilisateur non valide ';
+      throw 'Invalid user ID';
     } else {
       next();
     }
   } catch {
     //envoyer erreur d'authentification
     res.status(401).json({
-      error: new Error('mot de passe incorrect')
+      error: new Error('Invalid request!')
     });
   }
 };
