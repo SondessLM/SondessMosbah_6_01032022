@@ -21,7 +21,6 @@ exports.signup = (req, res, next) => {
   //Hasher 10 fois le mot de passe.
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
-
       //Créer un nouvel utilisateur.
       const user = new User({
         //Récuperer le corps de la requete.
@@ -29,11 +28,11 @@ exports.signup = (req, res, next) => {
         //Hasher le mot de passe lors de sa création.
         password: hash
       });
-
       //Enregistrement du nouvel utilisateur dans la BDD.
       user.save()
         .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
         .catch(error => res.status(400).json({ error }));
+        // .catch(error => res.status(400).json({ message : error.errors.email.message }));
     })
     .catch(error => res.status(500).json({ error }));
 };
