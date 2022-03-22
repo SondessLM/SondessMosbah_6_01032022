@@ -2,8 +2,6 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
-    "cors": "^2.8.5",
-    "crypto": "^1.0.1",
     "dotenv": "^16.0.0",
     "email-validator": "^2.0.4",
     "env": "^0.0.2",
@@ -17,10 +15,8 @@
     "lib": "^4.3.3",
     "mongoose": "^6.2.4",
     "mongoose-unique-validator": "^3.0.0",
-    "multer": "^1.4.4",
+    "multer": "^0.1.8",
     "password-validator": "^5.2.1",
-    "path": "^0.12.7",
-    "pug": "^3.0.2",
-    "response": "^0.18.0"
+    "path": "^0.12.7"
   }
 }

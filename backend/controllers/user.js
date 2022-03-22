@@ -8,7 +8,7 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 
 //Importer variable d'environnement.
-require('dotenv').config();
+//require('dotenv').config();
 
 /**
  * Inscription d'un utilisateur.

@@ -91,14 +91,14 @@ exports.deleteSauce = (req, res, next) => {
     .then((sauce) => {
       if (!sauce) {
         return res.status(404).json({
-          error: new Error('Pas de sauces!')
+          error: new Error('')
         });
       }
       if (sauce.userId !== req.auth.userId) {
         console.log(sauce.userId);
         console.log(req.auth.userId);
         return res.status(403).json({
-          error: new Error('Requete non authorisée!')
+          error: new Error('')
         });
       }
       const filename = sauce.imageUrl.split('/images/')[1];

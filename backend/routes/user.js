@@ -12,9 +12,9 @@ const validateEmail = require("../middleware/signup/validate-email");
 const validatePassword = require("../middleware/signup/validate-password");
 
 //Routes pour s'inscrire.
-router.post('/signup', validateEmail, validatePassword, userCtrl.signup );
+router.post('/signup',  validatePassword, userCtrl.signup );
 
 //Routes pour se connecter.
-router.post('/login', userCtrl.login );
+router.post('/login',validateEmail, userCtrl.login );
 
 module.exports = router;

@@ -18,17 +18,16 @@ const sauceSchema = mongoose.Schema({
   imageUrl: { type: String, required: true },
   //mettre un nombre entre 1 et 10 
   heat: { type: Number, required: true },
-  // nombre d'utilisateurs qui like la sauce
+  // nombre like
   likes: { type: Number, required: true },
-  // nombre d'utilisateurs qui dislike la
-// sauce
+  // nombre dislike 
   dislikes: { type: Number, required: true },
-  // tableau des identifiants des utilisateurs qui ont aimé la sauce
+  // tableau userId qui ont liké la sauce
   usersLiked: { type: [String], required: true },
-  // tableau des identifiants des utilisateurs qui n'ont pas aimé la sauce
+  // tableau userId qui ont disliké la sauce
   usersDisliked: { type: [String], required: true },
 });
 
-//Exportation du schema sous forme de modèle
+//Export du schema 
 module.exports = mongoose.model('Sauce', sauceSchema); 
 

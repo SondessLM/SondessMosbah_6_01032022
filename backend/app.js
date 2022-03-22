@@ -27,7 +27,6 @@ const  mongoSanitize  =  require ( 'express-mongo-sanitize' ) ;
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 
-//const cors = require('cors');                    // import cors: manage cross-origin resource sharing
 
 //configurer express rate limit
 const limiter = rateLimit({
@@ -66,7 +65,7 @@ app.use((req, res, next) => {
 });
 
 // application du package
-app.use(limiter);
+//app.use(limiter);
 
 app.use(mongoSanitize());
 
