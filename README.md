@@ -15,11 +15,11 @@ Then, clone this repo.
 
 ### Backend ###
 
-Install npm express run `npm install express`.
+Install npm express run `npm install`.
 
 Create  a folder `images`.
 
-Create a file `.env`with this url exemple `MONGO_URI=''mongodb+srv://...'`.
+Create a file `.env` with this url exemple `MONGO_URI=''mongodb+srv://...'`.
 
 Run `node server`or Run `nodemon server`.
 
