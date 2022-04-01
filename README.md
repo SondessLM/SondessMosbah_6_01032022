@@ -15,7 +15,7 @@ Then, clone this repo.
 
 ### Backend ###
 
-Install npm express run `npm install`.
+Install npm dependances run `npm install`.
 
 Create  a folder `images`.
 
